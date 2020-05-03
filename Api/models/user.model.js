@@ -1,3 +1,4 @@
+const sql = require("./db.js");
 
 // constructor
 const User = function(user) {
@@ -7,7 +8,6 @@ const User = function(user) {
 };
 
 User.create = (newUser, result) => {
-  const sql = require("./db.js");
   sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -21,7 +21,6 @@ User.create = (newUser, result) => {
 };
 
 User.findByUsername = (userUsername, result) => {
-  const sql = require("./db.js");
   sql.query(`SELECT * FROM User WHERE Username = "${userUsername}"`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -41,7 +40,6 @@ User.findByUsername = (userUsername, result) => {
 };
 
 User.getAll = result => {
-  const sql = require("./db.js");
   sql.query("SELECT * FROM User", (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -55,7 +53,6 @@ User.getAll = result => {
 };
 
 User.updateByUsername = (Username, user, result) => {
-  const sql = require("./db.js");
   sql.query(
     "UPDATE User SET Passwors = ?, Type = ? WHERE Username = ?",
     [user.Password, user.Type, Username],
@@ -79,7 +76,6 @@ User.updateByUsername = (Username, user, result) => {
 };
 
 User.remove = (Username, result) => {
-  const sql = require("./db.js");
   sql.query("DELETE FROM User WHERE Username = ?", Username, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -99,7 +95,6 @@ User.remove = (Username, result) => {
 };
 
 User.removeAll = result => {
-  const sql = require("./db.js");
   sql.query("DELETE FROM User", (err, res) => {
     if (err) {
       console.log("error: ", err);
