@@ -1,21 +1,21 @@
 module.exports = app => {
     const users = require("../controllers/user.controller.js");
   
-    // Create a new Customer
+    // Create a new User
     app.post("/users", users.create);
   
-    // Retrieve all Customers
+    // Retrieve all Users
     app.get("/users", users.findAll);
   
-    // Retrieve a single Customer with Username
+    // Retrieve a single User with Username
     app.get("/users/:Username", users.findOne);
   
-    // Update a Customer with Username
+    // Update a User with Username
     app.put("/users/:Username", users.update);
   
-    // Delete a Customer with Username
+    // Delete a User with Username
     app.delete("/users/:Username", users.delete);
   
-    // Create a new Customer
+    // Create all Users
     app.delete("/users", users.deleteAll);
   };
