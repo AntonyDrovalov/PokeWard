@@ -10,6 +10,7 @@ public class Login : MonoBehaviour
 {
     public GameObject username;
     public GameObject password;
+    public GameObject text_error;
     private string Username;
     private string Password;
     //private String[] Lines;
@@ -32,9 +33,9 @@ public class Login : MonoBehaviour
         {
             data = uwr.downloadHandler.text;
             Lines_data = data.Split(',');
-            Debug.Log("DATA: " + Lines_data.Length);
-            Debug.Log("Username: " + Lines_data[0]);
-            Debug.Log("Password: " + Lines_data[1]);
+            //Debug.Log("DATA: " + Lines_data.Length);
+            //Debug.Log("Username: " + Lines_data[0]);
+            //Debug.Log("Password: " + Lines_data[1]);
             
             bool UN = false;
             bool PW = false;
@@ -49,6 +50,8 @@ public class Login : MonoBehaviour
             }
             else
             {
+                text_error.GetComponent<Text>().text = "Username Invalid";
+                text_error.GetComponent<Text>().enabled = true;
                 Debug.LogWarning("Username Invalid");
             }
             if (Lines_data.Length == 3)
@@ -71,17 +74,18 @@ public class Login : MonoBehaviour
                 }
                 else
                 {
+                    text_error.GetComponent<Text>().text = "Password is Invalid";
                     Debug.LogWarning("Password is Invalid");
+                    text_error.GetComponent<Text>().enabled = true;
                 }
             }
-            else
-            {
-                Debug.LogWarning("Password is Invalid");
-            }
+            
             if (UN == true && PW == true)
             {
                 username.GetComponent<InputField>().text = "";
                 password.GetComponent<InputField>().text = "";
+                text_error.GetComponent<Text>().text = "Login Sucsessful";
+                text_error.GetComponent<Text>().enabled = true;
                 print("Login Sucsessful");
                 Application.LoadLevel("SampleScene");
             }
@@ -98,6 +102,11 @@ public class Login : MonoBehaviour
     public void LoginButton()
     {
         StartCoroutine(GetRequest("https://quiet-crag-61602.herokuapp.com/users/" + Username));
+    }
+
+    void Start()
+    {
+        text_error.GetComponent<Text>().enabled = false;
     }
 
     // Update is called once per frame

@@ -12,6 +12,7 @@ public class Register : MonoBehaviour
     public GameObject username;
     public GameObject password;
     public GameObject confPassword;
+    public GameObject text_error;
     private string Username;
     private string Password;
     private string ConfPassword;
@@ -51,6 +52,8 @@ public class Register : MonoBehaviour
             }
             else
             {
+                text_error.GetComponent<Text>().text = "Username Taken";
+                text_error.GetComponent<Text>().enabled = true;
                 Debug.LogWarning("Username Taken");
             }
 
@@ -60,6 +63,8 @@ public class Register : MonoBehaviour
             }
             else
             {
+                text_error.GetComponent<Text>().text = "Password Must Be atleast 6 Characters long";
+                text_error.GetComponent<Text>().enabled = true;
                 Debug.LogWarning("Password Must Be atleast 6 Characters long");
             }
 
@@ -69,6 +74,8 @@ public class Register : MonoBehaviour
             }
             else
             {
+                text_error.GetComponent<Text>().text = "Passwords Dont match";
+                text_error.GetComponent<Text>().enabled = true;
                 Debug.LogWarning("Passwords Dont match");
             }
 
@@ -101,6 +108,8 @@ public class Register : MonoBehaviour
                 username.GetComponent<InputField>().text = "";
                 password.GetComponent<InputField>().text = "";
                 confPassword.GetComponent<InputField>().text = "";
+                text_error.GetComponent<Text>().text = "Registration Complete";
+                text_error.GetComponent<Text>().enabled = true;
                 print("Registration Complete");
                 Application.LoadLevel("LoginScreen");
             }
@@ -138,7 +147,11 @@ public class Register : MonoBehaviour
     {
         StartCoroutine(GetRequest("https://quiet-crag-61602.herokuapp.com/users/" + Username));
     }
-        
+    
+    void Start()
+    {
+        text_error.GetComponent<Text>().enabled = false;
+    }
 
     // Update is called once per frame
     void Update()
