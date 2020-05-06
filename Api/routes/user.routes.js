@@ -8,13 +8,13 @@ module.exports = app => {
     app.get("/users", users.findAll);
   
     // Retrieve a single User with Username
-    app.get("/users/:Username", users.findOne);
+    app.get("/users/:username", users.findOne);
   
     // Update a User with Username
-    app.put("/users/:Username", users.update);
+    app.put("/users/:username", users.update);
   
     // Delete a User with Username
-    app.delete("/users/:Username", users.delete);
+    app.delete("/users/:username", users.delete);
   
     // Create all Users
     app.delete("/users", users.deleteAll);
