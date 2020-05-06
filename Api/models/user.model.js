@@ -2,9 +2,8 @@ const sql = require("./db.js");
 
 // constructor
 const User = function(user) {
-  this.Username = user.Username;
-  this.Password = user.Password;
-  this.Type = user.Type;
+  this.username = user.username;
+  this.password = user.password;
 };
 
 User.create = (newUser, result) => {
@@ -15,13 +14,13 @@ User.create = (newUser, result) => {
       return;
     }
 
-    console.log("created user: ", { Username: res.insertUsername, ...newUser });
-    result(null, { Username: res.insertUsername, ...newUser });
+    console.log("created user: ", { username: res.insertUsername, ...newUser });
+    result(null, { username: res.insertUsername, ...newUser });
   });
 };
 
 User.findByUsername = (userUsername, result) => {
-  sql.query(`SELECT * FROM User WHERE Username = "${userUsername}"`, (err, res) => {
+  sql.query(`SELECT * FROM User WHERE username = "${userUsername}"`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -52,10 +51,10 @@ User.getAll = result => {
   });
 };
 
-User.updateByUsername = (Username, user, result) => {
+User.updateByUsername = (username, user, result) => {
   sql.query(
-    "UPDATE User SET Passwors = ?, Type = ? WHERE Username = ?",
-    [user.Password, user.Type, Username],
+    "UPDATE User SET Passwors = ? WHERE username = ?",
+    [user.Password, username],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -69,14 +68,14 @@ User.updateByUsername = (Username, user, result) => {
         return;
       }
 
-      console.log("updated user: ", { Username: Username, ...user });
-      result(null, { Username: Username, ...user });
+      console.log("updated user: ", { username: username, ...user });
+      result(null, { username: username, ...user });
     }
   );
 };
 
-User.remove = (Username, result) => {
-  sql.query("DELETE FROM User WHERE Username = ?", Username, (err, res) => {
+User.remove = (username, result) => {
+  sql.query("DELETE FROM User WHERE username = ?", username, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -89,7 +88,7 @@ User.remove = (Username, result) => {
       return;
     }
 
-    console.log("deleted user with Username: ", Username);
+    console.log("deleted user with username: ", username);
     result(null, res);
   });
 };

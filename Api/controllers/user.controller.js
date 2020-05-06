@@ -11,9 +11,8 @@ exports.create = (req, res) => {
     
       // Create a User
       const user = new User({
-        Username: req.body.Username,
-        Password: req.body.Password,
-        Type: req.body.Type
+        username: req.body.username,
+        password: req.body.password
       });
     
       // Save User in the database
@@ -41,15 +40,15 @@ exports.findAll = (req, res) => {
 
 // Find a single User with a username
 exports.findOne = (req, res) => {
-    User.findByUsername(req.params.Username, (err, data) => {
+    User.findByUsername(req.params.username, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found User with Username${req.params.Username}.`
+              message: `Not found User with Username ${req.params.username}.`
             });
           } else {
             res.status(500).send({
-              message: "Error retrieving User with Username" + req.params.Username
+              message: "Error retrieving User with Username" + req.params.username
             });
           }
         } else res.send(data);
@@ -66,17 +65,17 @@ exports.update = (req, res) => {
       }
     
       User.updateById(
-        req.params.Username,
+        req.params.username,
         new User(req.body),
         (err, data) => {
           if (err) {
             if (err.kind === "not_found") {
               res.status(404).send({
-                message: `Not found User with Username${req.params.Username}.`
+                message: `Not found User with Username ${req.params.username}.`
               });
             } else {
               res.status(500).send({
-                message: "Error updating User with Username" + req.params.Username
+                message: "Error updating User with Username" + req.params.username
               });
             }
           } else res.send(data);
@@ -86,15 +85,15 @@ exports.update = (req, res) => {
 
 // Delete a User with the specified username in the request
 exports.delete = (req, res) => {
-    User.remove(req.params.Username, (err, data) => {
+    User.remove(req.params.username, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found User with Username${req.params.Username}.`
+              message: `Not found User with Username ${req.params.username}.`
             });
           } else {
             res.status(500).send({
-              message: "Could not delete User with Username" + req.params.Username
+              message: "Could not delete User with Username" + req.params.username
             });
           }
         } else res.send({ message: `User was deleted successfully!` });
