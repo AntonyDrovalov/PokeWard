@@ -22,9 +22,8 @@ public class Register : MonoBehaviour
 
     public class JsonClass
     {
-        public string Username;
-        public string Password;
-        public int Type;
+        public string username;
+        public string password;
     }
 
     IEnumerator GetRequest(string uri)
@@ -99,9 +98,8 @@ public class Register : MonoBehaviour
                 //form = (Username + Environment.NewLine + Password);
                 //System.IO.File.WriteAllText(@"C:/Anton/UnityTest/" + Username + ".txt", form); // api send req
                 JsonClass form = new JsonClass();
-                form.Username = Username;
-                form.Password = Password;
-                form.Type = 1;
+                form.username = Username;
+                form.password = Password;
                 string json = JsonUtility.ToJson(form);
 
                 StartCoroutine(PostRequest("https://quiet-crag-61602.herokuapp.com/users", json));

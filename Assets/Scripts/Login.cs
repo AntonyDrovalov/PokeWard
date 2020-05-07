@@ -31,6 +31,7 @@ public class Login : MonoBehaviour
         }
         else
         {
+            DecryptedPass = "";
             data = uwr.downloadHandler.text;
             Lines_data = data.Split(',');
             //Debug.Log("DATA: " + Lines_data.Length);
@@ -40,7 +41,7 @@ public class Login : MonoBehaviour
             bool UN = false;
             bool PW = false;
             
-            if (Lines_data.Length == 3) //api check
+            if (Lines_data.Length == 2) //api check
             {
                 UN = true;
                 //List<string> Lines = new List<string>();
@@ -54,9 +55,9 @@ public class Login : MonoBehaviour
                 text_error.GetComponent<Text>().enabled = true;
                 Debug.LogWarning("Username Invalid");
             }
-            if (Lines_data.Length == 3)
+            if (Lines_data.Length == 2)
             {
-                Lines[1] = Lines[1].Trim('"');
+                Lines[1] = Lines[1].Trim('"','}');
                 //DecryptedPass = Lines[1];
                 //DecryptedPass = DecryptedPass.Trim('"');
 
@@ -75,6 +76,8 @@ public class Login : MonoBehaviour
                 else
                 {
                     text_error.GetComponent<Text>().text = "Password is Invalid";
+                    Debug.LogWarning(Password);
+                    Debug.LogWarning(DecryptedPass);
                     Debug.LogWarning("Password is Invalid");
                     text_error.GetComponent<Text>().enabled = true;
                 }
