@@ -9,24 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2067402452, guid: 4bc5fd733b147194692297d23f623541, type: 3}
+  m_Script: {fileID: -2067402452, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
     vuforiaLicenseKey: Aa7antf/////AAABmeKHUDXLcUHhmhbg6oQnCTaBQXwG2HpIWby8JlkK5+lo1x9S2GcCrLfGAj83aAKzoqTqa54FdyJfbXShrWQwW+zPUhWq9Si2M+jvLLyHL2t2F0qU1FCiUGgY+G2K9NGsgRiAWV5kf2S8nplcIpfuzNcXu1t5nV6O2JtC6acGwTqlE2L3XdFyRdO6jUyvRQ+etlhxum6HEgybx3v0eGGx8u39JyvkFUCA4Wsd3YIxQ7ZF0oZiGcmBde33atSzxVE6uKNMVcMlOElvGMAkHrY7ZMaK2OovNA1yQ7kideyfdPW3r/uWEcR+kYPSx530iT7Zd6jIEqawHc76cIjIt7jflMK5OETkqmjNjhg2QU4GwixG
-    ufoLicenseKey: QVhiM0Y1Ly8vLy8vQUFBQUtPbnFIeHJFSGs1N3VrMlg4U050eVBzK2pkOFZxMDhrazlwYjBsYS9aZUIxQlV1ckZWcWt0ZllSQWpnT2tIRlY2VzdOMDRTRjNYRUhmbTF5L1BnYlB4eWdHWEF6RUNheXowc3dyNVNYa2ozdERuRjhka1FpOHRscHdkMDcrcEJEY1FjTjNJcUM1bEgwOTYzQkdZdjRsQStRb0hSQU9nRGthelp5TlY0WHVwWU9EaE05NWw5bXAzbnBDMjM5MWZBWXBFdEdiL2loTDNab3N4b25ZblhjK1JtSS9wLzRoTDIwVGhmTXR6WFJNYkpUTXZLZzJoQ0N0TEJXNEptZ0pSOUtSdStzQWM3QjVNOWFFMGVHQ1dUT1VRSUUweEpiZC9ZL2cvS29iNDhBRXdQOGFwbWR5NmRWU0FHU2psVzRZY2FEU2Zud3J1ZHhucVNmSUZiajNTUnIzM0lKVlFIaW1rL0oyOGNFeDdyekcySXg=
+    ufoLicenseKey: QVl5WWlzNy8vLy8vQUFBQUtEZ2g0b1Q2TVVzTGdIRFFZRDBEdUo5TDVuZ283bnh1ay9jUnFqTStoZ2VtNHZTRDdqTjV5ZFlXeVFoelpiL3NOd2oyeUY4dTBKeGhkY0dDd1lDK2RSQlBOcncwNndSNSttQVJlbk1vb0RXWGFrZldRSEd0aDAwQVhaWXMvWjl2M0RJeUIyd3NZTVBPY2lQV05qMlhqU0pqQlBJVEdwbThqdVJlQXdwL01QUHBpN2ZOVmR1ejhQR1pMdTQzSFZSak9vTVd6b0ZlWmdmN3NHVEg3S2ltK2twc3pTKzFYVDBTYXljcTJzVXd6b0pxNnhDWlhiQmpUUGtYSHRuNnZMUFhRUnR1SFdjcUZydVlIaUFRU0w3QkEvTE43eGprSHRBd3BpdjlMdno5cXpRM3Y2aDc1cXNFMkpURisycGhpc1lGQ3ZEREx3aWUzYkFDMGQ2N25STUJsaGFlL0Ixd09KRVNkaFpZM2F3UlBBbmI=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 1
+    maxSimultaneousImageTargets: 4
     maxSimultaneousObjectTargets: 1
     virtualSceneScaleFactor: 1
     useDelayedLoadingObjectTargets: 0
     modelTargetRecoWhileExtendedTracked: 1
     version: 9.0.12
-    eulaAcceptedVersions: '{"Values":["7.5","9.0"]}'
+    eulaAcceptedVersions: '{"Values":["","7.5","9.0","0.0","9.1"]}'
     modelTargetMode: 0
   database:
-    disableModelExtraction: 0
+    disableModelExtraction: 1
   videoBackground:
     numDivisions: 2
     videoBackgroundShader: {fileID: 4800000, guid: f40623b353e2f1943b1b3ba42975db7a,
