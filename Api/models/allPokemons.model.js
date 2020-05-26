@@ -50,4 +50,26 @@ AllPokemons.getAll = result => {
   });
 };
 
+AllPokemons.updateByModel = (model, pokemon, result) => {
+  sql.query(
+    "UPDATE AllPokemons SET name = ? WHERE model = ?",
+    [pokemon.name, model],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("updated pokemon: ", { model: model, ...pokemon });
+      result(null, { model: model, ...pokemon });
+    }
+  );
+};
+
 module.exports = AllPokemons;

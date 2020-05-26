@@ -64,7 +64,7 @@ exports.update = (req, res) => {
         });
       }
     
-      User.updateById(
+      User.updateByUsername(
         req.params.username,
         new User(req.body),
         (err, data) => {

@@ -6,4 +6,6 @@ module.exports = app => {
     app.get("/all-pokemons", allPokemons.findAll);
   
     app.get("/all-pokemons/:model", allPokemons.findOne);
+
+    app.put("/all-pokemons/:model", allPokemons.update);
   };
