@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 require("./routes/user.routes.js")(app);
 require("./routes/type.routes.js")(app);
 require("./routes/allPokemons.routes.js")(app);
+require("./routes/usertype.routes.js")(app);
 
 // set port, listen for requests
 app.listen(PORT, () => {

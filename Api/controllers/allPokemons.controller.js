@@ -58,7 +58,7 @@ exports.update = (req, res) => {
         message: "Content can not be empty!"
       });
     }
-  
+    console.log(req.body);
     AllPokemons.updateByModel(
       req.params.model,
       new AllPokemons(req.body),
