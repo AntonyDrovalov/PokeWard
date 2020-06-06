@@ -28,8 +28,8 @@ Usertype.findById = (username, result) => {
     }
 
     if (res.length) {
-      console.log("found type: ", res[0]);
-      result(null, res[0]);
+      console.log("found types: ", res);
+      result(null, res);
       return;
     }
 
