@@ -55,6 +55,22 @@ exports.findOne = (req, res) => {
       });
 };
 
+exports.findUserWithType = (req, res) => {
+  User.findTypeByUsername(req.params.username, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found User with Username ${req.params.username}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving User with Username" + req.params.username
+          });
+        }
+      } else res.send(data);
+    });
+};
+
 // Update a User identified by the username in the request
 exports.update = (req, res) => {
     // Validate Request

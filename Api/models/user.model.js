@@ -38,6 +38,29 @@ User.findByUsername = (userUsername, result) => {
   });
 };
 
+User.findTypeByUsername = (userUsername, result) => {
+  sql.query(`SELECT User.username, User.password, UserType.typeId
+  FROM User
+  RIGHT JOIN UserType ON User.username = UserType.username
+  WHERE User.username = "${userUsername}"
+  ORDER BY User.username`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found types: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found User with the Username
+    result({ kind: "not_found" }, null);
+  });
+};
+
 User.getAll = result => {
   sql.query("SELECT * FROM User", (err, res) => {
     if (err) {
