@@ -11,9 +11,16 @@ using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.Networking;
+using static Globals;
 
 public class CloudContentManager : MonoBehaviour
 {
+
+    public string target;
+    public string new_model;
+    public string data;
+    public String[] Lines_data;
+    private bool anim;
 
     #region PRIVATE_MEMBER_VARIABLES
 
@@ -34,10 +41,8 @@ public class CloudContentManager : MonoBehaviour
     }
 
     public AugmentationObject[] AugmentationObjects;
-    private string target = "1";
-    private string new_model = "";
-    private string data;
-    private String[] Lines_data;
+    //public Animation anim1;
+    //public Animation anim2;
 
     readonly string[] starRatings = { "☆☆☆☆☆", "★☆☆☆☆", "★★☆☆☆", "★★★☆☆", "★★★★☆", "★★★★★" };
 
@@ -45,37 +50,136 @@ public class CloudContentManager : MonoBehaviour
     Transform contentManagerParent;
     Transform currentAugmentation;
 
+    #endregion // PRIVATE_MEMBER_VARIABLES
+
+    #region UNITY_MONOBEHAVIOUR_METHODS
+
+
+    void Start()
+    {
+        Debug.Log("USERNAME STORED = " + Globals.Global_user);
+        Augmentations = new Dictionary<string, GameObject>();
+
+        for (int a = 0; a < AugmentationObjects.Length; ++a)
+        {
+            Augmentations.Add(AugmentationObjects[a].targetName,
+                              AugmentationObjects[a].augmentation);
+            //AugmentationObjects[a].augmentation.GetComponent<Animator>().enabled = false;
+        }
+        anim = false;
+        //AugmentationObjects[0].augmentation.GetComponent<Animator>().enabled = false;
+        //AugmentationObjects[1].augmentation.GetComponent<Animator>().enabled = false;
+        Debug.Log("Aug: " + Augmentations);
+    }
+
+    #endregion // UNITY_MONOBEHAVIOUR_METHODS
+
+
+    #region PUBLIC_METHODS
+
     IEnumerator Upload()
     {
-        if(new_model == "charmander"){
-            new_model = "squirtle";
+        if(Globals.Global_model == "charmander"){
+            Globals.Global_model = "squirtle";
             Debug.Log("CHAR - SQRT");
         }
         else{
-            new_model = "charmander";
+            Globals.Global_model = "charmander";
             Debug.Log("SQRT - CHAR");
         }
 
-        JsonClass form = new JsonClass();
-        form.model = target;
-        form.name = new_model;
-        string json = JsonUtility.ToJson(form);
-        Debug.Log("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + target);
-        Debug.Log(new_model);
-        Debug.Log(json);
-        using (UnityWebRequest www = UnityWebRequest.Put("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + target, json))
-        {
-            yield return www.Send();
+        var uwr = new UnityWebRequest("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + Globals.Global_target, "PUT");
 
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log("Upload complete!");
-            }
+        JsonClass form = new JsonClass();
+        form.model = Globals.Global_target;
+        form.name = Globals.Global_model;
+        string json = JsonUtility.ToJson(form);
+        Debug.Log("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + Globals.Global_target);
+        Debug.Log(Globals.Global_model);
+        Debug.Log(json);
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        //byte[] myData = System.Text.Encoding.UTF8.GetBytes(json);
+        //Debug.Log(myData.Length);
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError || uwr.isHttpError)
+        {
+            Debug.Log(uwr.error);
         }
+        else
+        {
+            //Debug.Log("My data=" + myData);
+            Debug.Log("Upload complete!");
+        }
+        
+    }
+
+    IEnumerator Upload_charmander()
+    {
+
+        var uwr = new UnityWebRequest("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + Globals.Global_target, "PUT");
+
+        JsonClass form = new JsonClass();
+        form.model = Globals.Global_target;
+        form.name = "charmander";
+        string json = JsonUtility.ToJson(form);
+        Debug.Log("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + Globals.Global_target);
+        Debug.Log(Globals.Global_model);
+        Debug.Log(json);
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        //byte[] myData = System.Text.Encoding.UTF8.GetBytes(json);
+        //Debug.Log(myData.Length);
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError || uwr.isHttpError)
+        {
+            Debug.Log(uwr.error);
+        }
+        else
+        {
+            //Debug.Log("My data=" + myData);
+            Debug.Log("Upload complete!");
+        }  
+    }
+
+    IEnumerator Upload_squirtle()
+    {
+
+        var uwr = new UnityWebRequest("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + Globals.Global_target, "PUT");
+
+        JsonClass form = new JsonClass();
+        form.model = Globals.Global_target;
+        form.name = "squirtle";
+        string json = JsonUtility.ToJson(form);
+        Debug.Log("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + Globals.Global_target);
+        Debug.Log(Globals.Global_model);
+        Debug.Log(json);
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        //byte[] myData = System.Text.Encoding.UTF8.GetBytes(json);
+        //Debug.Log(myData.Length);
+        uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError || uwr.isHttpError)
+        {
+            Debug.Log(uwr.error);
+        }
+        else
+        {
+            //Debug.Log("My data=" + myData);
+            Debug.Log("Upload complete!");
+        }  
     }
 
     IEnumerator GetRequest(string uri)
@@ -89,7 +193,7 @@ public class CloudContentManager : MonoBehaviour
         }
         else
         {
-            new_model = "";
+            Globals.Global_model = "";
             data = uwr.downloadHandler.text;
             Lines_data = data.Split(',');
             Debug.Log("DATA: " + Lines_data.Length);
@@ -99,12 +203,12 @@ public class CloudContentManager : MonoBehaviour
             
             if (Lines_data.Length == 2) //api check
             {
-                new_model = Lines_data[0].Split(':')[1];
-                new_model = new_model.Trim('"','}');
-                Debug.LogWarning(new_model);
-                Debug.LogWarning(target);
+                Globals.Global_model = Lines_data[0].Split(':')[1];
+                Globals.Global_model = Globals.Global_model.Trim('"','}');
+                Debug.LogWarning(Globals.Global_model);
+                Debug.LogWarning(Globals.Global_target);
                 
-                GameObject augmentation = GetValuefromDictionary(Augmentations, new_model);
+                GameObject augmentation = GetValuefromDictionary(Augmentations, Globals.Global_model);
                 if (augmentation != null)
                 {
                     if (augmentation.transform.parent != CloudTarget.transform)
@@ -141,7 +245,7 @@ public class CloudContentManager : MonoBehaviour
                         }
 
                     }
-                }
+                } 
             }
             else
             {
@@ -151,31 +255,41 @@ public class CloudContentManager : MonoBehaviour
         }
     }
 
-    #endregion // PRIVATE_MEMBER_VARIABLES
-
-    #region UNITY_MONOBEHAVIOUR_METHODS
-
-
-    void Start()
-    {
-        Augmentations = new Dictionary<string, GameObject>();
-
-        for (int a = 0; a < AugmentationObjects.Length; ++a)
-        {
-            Augmentations.Add(AugmentationObjects[a].targetName,
-                              AugmentationObjects[a].augmentation);
-        }
+    public void ChangePokemon()
+    {   
+        Application.LoadLevel("SelectionScene");
+        //Debug.Log(targetSearchResult);
     }
 
-    #endregion // UNITY_MONOBEHAVIOUR_METHODS
+    public void BackButton(){
+        Application.LoadLevel("SampleScene");
+    }
 
+    public void PlayButton(){
+        GameObject augmentation = GetValuefromDictionary(Augmentations, Globals.Global_model);
+        
+        augmentation.GetComponent<Animator>().enabled = false;
+        //anim.Stop();
+        
+        //else{
+        //    augmentation.GetComponent<Animator>().enabled = false;
+            //anim.Play();
+        
 
-    #region PUBLIC_METHODS
+    }
 
-    public void ChangePokemon(string Pokemon)
-    {
-        StartCoroutine(Upload());
-        Debug.Log("Change pokemon");
+    public void ChangePokemonCharmander()
+    {   
+        StartCoroutine(Upload_charmander());
+        Application.LoadLevel("SampleScene");
+        //Debug.Log(targetSearchResult);
+    }
+
+    public void ChangePokemonSquirtle()
+    {   
+        StartCoroutine(Upload_squirtle());
+        Application.LoadLevel("SampleScene");
+        //Debug.Log(targetSearchResult);
     }
 
     public void ShowTargetInfo(bool showInfo)
@@ -187,16 +301,19 @@ public class CloudContentManager : MonoBehaviour
 
     public void HandleTargetFinderResult(Vuforia.TargetFinder.CloudRecoSearchResult targetSearchResult)
     {
-        Debug.Log("<color=blue>HandleTargetFinderResult(): " + targetSearchResult.TargetName + "</color>");
+        Globals.Global_target = targetSearchResult.TargetName;
         target = targetSearchResult.TargetName;
-        cloudTargetInfo.text =
-            "Name: " + targetSearchResult.TargetName +
-            "\nRating: " + starRatings[targetSearchResult.TrackingRating] +
-            "\nMetaData: " + ((targetSearchResult.MetaData.Length > 0) ? targetSearchResult.MetaData : "No") +
-            "\nTarget Id: " + targetSearchResult.UniqueTargetId;
-
-        StartCoroutine(GetRequest("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + targetSearchResult.TargetName));
+        Debug.Log("<color=blue>HandleTargetFinderResult(): " + target + "</color>");
         
+        Debug.Log("TARGET1 = " + target);
+        
+
+        StartCoroutine(GetRequest("https://quiet-crag-61602.herokuapp.com/all-pokemons/" + target));
+        Debug.Log("TARGET2 = " + target);
+        cloudTargetInfo.text =
+            "Target: " + target +
+            "\nPokemon: " + Globals.Global_model;
+        Debug.Log("TARGET GLOBAL = " + Globals.Global_target);
     }
 
     #endregion // PUBLIC_METHODS

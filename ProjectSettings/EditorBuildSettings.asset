@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/RegisterScreen.unity
     guid: fc25eebc18ab98e43b13ea1d042d39d0
   - enabled: 1
+    path: Assets/Scenes/TypeScene.unity
+    guid: 6ed2d6894f60370418f44d8105a27e00
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: e434bc354d6d54b899b4fbf77b3118a3
+  - enabled: 1
+    path: Assets/Scenes/SelectionScene.unity
+    guid: 9f3f97fc8b8af2c49b1fcca02c1fa557
   - enabled: 0
     path: Assets/SamplesResources/Scenes/0-Splash.unity
     guid: 7238041e8d31f4d439b8851a5d4bb6fa

@@ -95,21 +95,23 @@ public class Register : MonoBehaviour
                 }
                 
                 
-                //form = (Username + Environment.NewLine + Password);
-                //System.IO.File.WriteAllText(@"C:/Anton/UnityTest/" + Username + ".txt", form); // api send req
-                JsonClass form = new JsonClass();
-                form.username = Username;
-                form.password = Password;
-                string json = JsonUtility.ToJson(form);
+                
+                //JsonClass form = new JsonClass();
+                //form.username = Username;
+                //form.password = Password;
+                //string json = JsonUtility.ToJson(form);
 
-                StartCoroutine(PostRequest("https://quiet-crag-61602.herokuapp.com/users", json));
+
+                //StartCoroutine(PostRequest("https://quiet-crag-61602.herokuapp.com/users", json));
+                Globals.Login_register = Username;
+                Globals.Password_register = Password;
                 username.GetComponent<InputField>().text = "";
                 password.GetComponent<InputField>().text = "";
                 confPassword.GetComponent<InputField>().text = "";
-                text_error.GetComponent<Text>().text = "Registration Complete";
-                text_error.GetComponent<Text>().enabled = true;
-                print("Registration Complete");
-                Application.LoadLevel("LoginScreen");
+                //text_error.GetComponent<Text>().text = "Registration Complete";
+                //text_error.GetComponent<Text>().enabled = true;
+                //print("Registration Complete");
+                Application.LoadLevel("TypeScene");
             }
 
         }
@@ -145,6 +147,10 @@ public class Register : MonoBehaviour
     {
         StartCoroutine(GetRequest("https://quiet-crag-61602.herokuapp.com/users/" + Username));
     }
+
+    //public void toTypeSelection(){
+    //    Application.LoadLevel("TypeScene");
+    //}
     
     void Start()
     {

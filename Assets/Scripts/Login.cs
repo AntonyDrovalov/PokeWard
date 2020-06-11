@@ -5,6 +5,7 @@ using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using UnityEngine.Networking;
+using static Globals;
 
 public class Login : MonoBehaviour
 {
@@ -85,11 +86,13 @@ public class Login : MonoBehaviour
             
             if (UN == true && PW == true)
             {
+                Globals.Global_user = Username;
                 username.GetComponent<InputField>().text = "";
                 password.GetComponent<InputField>().text = "";
                 text_error.GetComponent<Text>().text = "Login Sucsessful";
                 text_error.GetComponent<Text>().enabled = true;
                 print("Login Sucsessful");
+                
                 Application.LoadLevel("SampleScene");
             }
             
